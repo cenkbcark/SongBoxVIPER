@@ -13,8 +13,6 @@ final class MainDataSource: NSObject {
     weak var tableView: UITableView?
     weak var presenter: MainModule.Presenter?
     
-    private var items: [RowItem] = []
-    
     required init (_ tableView: UITableView) {
         super.init()
         self.tableView = tableView
@@ -68,15 +66,6 @@ extension MainDataSource: UITableViewDelegate {
         switch tableItems {
         case .songs(model: let songs):
             presenter?.didSelectMusic(with: songs[indexPath.row])
-        }
-    }
-}
-
-extension MainDataSource {
-    func setItems(_ items: [RowItem]) {
-        self.items = items
-        DispatchQueue.main.async {
-            self.tableView?.reloadData()
         }
     }
 }
